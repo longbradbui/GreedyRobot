@@ -23,22 +23,22 @@ Robot::Robot(int max_distance, int robot_x, int robot_y, int treasure_x, int tre
 
 int Robot::RobotX() const
 {
-	return robot_location_.x();
+	return robot_location_.GetX();
 }
 
 int Robot::RobotY() const
 {
-	return robot_location_.y();
+	return robot_location_.GetY();
 }
 
 int Robot::TreasureX() const
 {
-	return treasure_location_.x();
+	return treasure_location_.GetX();
 }
 
 int Robot::TreasureY() const
 {
-	return treasure_location_.y();
+	return treasure_location_.GetY();
 }
 
 int Robot::GetTotalPaths() const

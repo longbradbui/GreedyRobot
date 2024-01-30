@@ -14,12 +14,12 @@ Coordinates::Coordinates(int x, int y)
 	SetY(y);
 }
 
-int Coordinates::x() const
+int Coordinates::GetX() const
 {
 	return x_;
 }
 
-int Coordinates::y() const
+int Coordinates::GetY() const
 {
 	return y_;
 }
@@ -36,15 +36,15 @@ void Coordinates::SetY(int y)
 
 Coordinates& Coordinates::operator+=(const Coordinates& rhs)
 {
-	x_ = this->x() + rhs.x();
-	y_ = this->y() + rhs.y();
+	x_ = this->GetX() + rhs.GetX();
+	y_ = this->GetY() + rhs.GetY();
 	return *this;
 }
 
 Coordinates& Coordinates::operator-=(const Coordinates& rhs)
 {
-	x_ = this->x() - rhs.x();
-	y_ = this->y() - rhs.y();
+	x_ = this->GetX() - rhs.GetX();
+	y_ = this->GetY() - rhs.GetY();
 	return *this;
 }
 

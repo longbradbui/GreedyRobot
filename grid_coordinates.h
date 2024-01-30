@@ -7,8 +7,8 @@ class Coordinates
 public:
 	Coordinates();
 	Coordinates(int x, int y);
-	int x() const;
-	int y() const;
+	int GetX() const;
+	int GetY() const;
 	void SetX(int x);
 	void SetY(int y);
 	Coordinates& operator+=(const Coordinates& rhs);
