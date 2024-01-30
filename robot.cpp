@@ -5,22 +5,22 @@ using namespace std;
 
 Robot::Robot()
 {
-	max_distance_ = 1;
 	robot_location_.SetX(1);
 	robot_location_.SetY(1);
 	treasure_location_.SetX(1);
 	treasure_location_.SetY(1);
+	max_distance_ = 1;
 	num_paths_ = 0;
 	path_so_far_ = "";
 }
 
 Robot::Robot(int max_distance, int robot_x, int robot_y, int treasure_x, int treasure_y)
 {
-	max_distance_ = max_distance;
 	robot_location_.SetX(robot_x);
 	robot_location_.SetY(robot_y);
 	treasure_location_.SetX(treasure_x);
 	treasure_location_.SetY(treasure_y);
+	max_distance_ = max_distance;
 	num_paths_ = 0;
 	path_so_far_ = "";
 }
