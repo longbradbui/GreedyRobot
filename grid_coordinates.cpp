@@ -1,4 +1,6 @@
 #include "grid_coordinates.h"
+#include <iostream>
+using namespace std;
 
 Coordinates::Coordinates()
 {
@@ -24,10 +26,38 @@ int Coordinates::y() const
 
 void Coordinates::SetX(int x)
 {
-	this->x_ = x;
+	x_ = x;
 }
 
 void Coordinates::SetY(int y)
 {
-	this->y_ = y;
+	y_ = y;
+}
+
+Coordinates& Coordinates::operator+=(const Coordinates& rhs)
+{
+	x_ = this->x() + rhs.x();
+	y_ = this->y() + rhs.y();
+	return *this;
+}
+
+Coordinates& Coordinates::operator-=(const Coordinates& rhs)
+{
+	x_ = this->x() - rhs.x();
+	y_ = this->y() - rhs.y();
+	return *this;
+}
+
+Coordinates Coordinates::operator+(const Coordinates& rhs) const
+{
+	Coordinates temp = *this;
+	temp += rhs;
+	return temp;
+}
+
+Coordinates Coordinates::operator-(const Coordinates& rhs) const
+{
+	Coordinates temp = *this;
+	temp += rhs;
+	return temp;
 }
