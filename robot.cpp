@@ -79,3 +79,36 @@ void Robot::SetRobotPath(string& new_path)
 {
 	robot_path_.push_back(new_path);
 }
+
+bool Robot::CheckValidMove(string& path_so_far, char& move) const
+{
+	int counter = 0;
+	if ((path_so_far.length() == 0) || ((GetMaxDistance() > 1) && (path_so_far.length() == 1)))
+	{
+		return true;
+	}
+	for (int i = path_so_far.length() - 1; i >= 0; i--)
+	{
+		if (path_so_far.at(i) == move)
+		{
+			counter++;
+		}
+		else if (path_so_far.at(i) != move)
+		{
+			break;
+		}
+	}
+	return counter <= GetMaxDistance();
+}
+
+void Robot::PrintTotalPath() const
+{
+	if ((RobotX() == TreasureX()) && (RobotY() == TreasureY()))
+	{
+		cout << "Number of path: 0" << endl;
+	}
+	else 
+	{
+		cout << "Number of path: " << GetTotalPaths() << endl;
+	}
+}

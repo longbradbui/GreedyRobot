@@ -61,3 +61,13 @@ Coordinates Coordinates::operator-(const Coordinates& rhs) const
 	temp += rhs;
 	return temp;
 }
+
+bool Coordinates::operator==(const Coordinates& rhs) const
+{
+	return ((this->GetX() == rhs.GetX()) && (this->GetY() == rhs.GetY()));
+}
+
+bool Coordinates::operator!=(const Coordinates& rhs) const
+{
+	return !(*this == rhs);
+}

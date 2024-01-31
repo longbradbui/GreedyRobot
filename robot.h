@@ -19,8 +19,10 @@ public:
 	int GetShortestPath() const;
 	string PathSoFar() const;
 	vector<string> RobotPath() const;
+	void PrintTotalPath() const;
 	void SetPathSoFar(string& new_move);
 	void SetRobotPath(string& new_path);
+	bool CheckValidMove(string& path_so_far, char& move) const;
 
 private:
 	int max_distance_;
