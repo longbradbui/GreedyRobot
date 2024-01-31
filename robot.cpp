@@ -5,10 +5,10 @@ using namespace std;
 
 Robot::Robot()
 {
-	robot_.x_ = 1;
-	robot_.y_ = 1;
-	treasure_.x_ = 1;
-	treasure_.y_ = 1;
+	robot_.x_ = 0;
+	robot_.y_ = 0;
+	treasure_.x_ = 0;
+	treasure_.y_ = 0;
 	max_distance_ = 1;
 	num_paths_ = 0;
 	path_so_far_ = "";
@@ -29,22 +29,22 @@ Robot::Robot(int max_distance, int robot_x, int robot_y, int treasure_x, int tre
 
 int Robot::RobotX() const
 {
-	return robot_.GetX();
+	return robot_.x_;
 }
 
 int Robot::RobotY() const
 {
-	return robot_.GetY();
+	return robot_.y_;
 }
 
 int Robot::TreasureX() const
 {
-	return treasure_.GetX();
+	return treasure_.x_;
 }
 
 int Robot::TreasureY() const
 {
-	return treasure_.GetY();
+	return treasure_.y_;
 }
 
 int Robot::GetTotalPaths() const

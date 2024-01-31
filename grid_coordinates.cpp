@@ -2,49 +2,26 @@
 #include <iostream>
 using namespace std;
 
-Coordinates::Coordinates()
+Coordinates::Coordinates(): x_(0), y_(0)
 {
-	SetX(0);
-	SetY(0);
 }
 
-Coordinates::Coordinates(int x, int y)
+Coordinates::Coordinates(int x, int y): x_(x), y_(y)
 {
-	SetX(x);
-	SetY(y);
 }
 
-int Coordinates::GetX() const
-{
-	return x_;
-}
-
-int Coordinates::GetY() const
-{
-	return y_;
-}
-
-void Coordinates::SetX(int x)
-{
-	x_ = x;
-}
-
-void Coordinates::SetY(int y)
-{
-	y_ = y;
-}
 
 Coordinates& Coordinates::operator+=(const Coordinates& rhs)
 {
-	x_ = this->GetX() + rhs.GetX();
-	y_ = this->GetY() + rhs.GetY();
+	x_ = this->x_ + rhs.x_;
+	y_ = this->y_ + rhs.y_;
 	return *this;
 }
 
 Coordinates& Coordinates::operator-=(const Coordinates& rhs)
 {
-	x_ = this->GetX() - rhs.GetX();
-	y_ = this->GetY() - rhs.GetY();
+	x_ = this->x_ - rhs.x_;
+	y_ = this->y_ - rhs.y_;
 	return *this;
 }
 
@@ -64,7 +41,7 @@ Coordinates Coordinates::operator-(const Coordinates& rhs) const
 
 bool Coordinates::operator==(const Coordinates& rhs) const
 {
-	return ((this->GetX() == rhs.GetX()) && (this->GetY() == rhs.GetY()));
+	return ((this->x_ == rhs.x_) && (this->y_ == rhs.y_));
 }
 
 bool Coordinates::operator!=(const Coordinates& rhs) const

@@ -16,7 +16,7 @@ int main()
     cout << r.TreasureX() << endl;
     cout << r.TreasureY() << endl;
     cout << r.GetTotalPaths() << "." << endl; // this is currently an empty vector
-    cout << r.PathSoFar() << "." << endl;    //  this is currently an empty string
+    cout << r.GetPathSoFar() << "." << endl;    //  this is currently an empty string
     cout << "TEST COMPLETE" << endl;
     return 0;
 }

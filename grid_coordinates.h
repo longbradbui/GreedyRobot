@@ -5,14 +5,10 @@ using namespace std;
 class Coordinates
 {
 public:
-	Coordinates();
-	Coordinates(int x, int y);
 	int x_;
 	int y_;
-	int GetX() const;
-	int GetY() const;
-	void SetX(int x);
-	void SetY(int y);
+	Coordinates();
+	Coordinates(int x, int y);
 	Coordinates& operator+=(const Coordinates& rhs);
 	Coordinates& operator-=(const Coordinates& rhs);
 	Coordinates operator+(const Coordinates& rhs) const;
@@ -21,6 +17,5 @@ public:
 	bool operator!=(const Coordinates& rhs) const;
 	
 };
-
 #endif
 
