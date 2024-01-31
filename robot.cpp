@@ -5,10 +5,10 @@ using namespace std;
 
 Robot::Robot()
 {
-	robot_location_.SetX(1);
-	robot_location_.SetY(1);
-	treasure_location_.SetX(1);
-	treasure_location_.SetY(1);
+	robot_.x_ = 1;
+	robot_.y_ = 1;
+	treasure_.x_ = 1;
+	treasure_.y_ = 1;
 	max_distance_ = 1;
 	num_paths_ = 0;
 	path_so_far_ = "";
@@ -16,33 +16,35 @@ Robot::Robot()
 
 Robot::Robot(int max_distance, int robot_x, int robot_y, int treasure_x, int treasure_y)
 {
-	robot_location_.SetX(robot_x);
-	robot_location_.SetY(robot_y);
-	treasure_location_.SetX(treasure_x);
-	treasure_location_.SetY(treasure_y);
+	robot_.x_ = robot_x ;
+	robot_.y_ = robot_y;
+	treasure_.x_ = treasure_x;
+	treasure_.y_ = treasure_y;
 	max_distance_ = max_distance;
 	num_paths_ = 0;
 	path_so_far_ = "";
+	CountPathLhs(robot_.x_, robot_.y_, treasure_.x_, treasure_.y_, path_so_far_);
+	CountPathRhs(robot_.x_, robot_.y_, treasure_.x_, treasure_.y_, path_so_far_);
 }
 
 int Robot::RobotX() const
 {
-	return robot_location_.GetX();
+	return robot_.GetX();
 }
 
 int Robot::RobotY() const
 {
-	return robot_location_.GetY();
+	return robot_.GetY();
 }
 
 int Robot::TreasureX() const
 {
-	return treasure_location_.GetX();
+	return treasure_.GetX();
 }
 
 int Robot::TreasureY() const
 {
-	return treasure_location_.GetY();
+	return treasure_.GetY();
 }
 
 int Robot::GetTotalPaths() const
@@ -60,17 +62,17 @@ int Robot::GetShortestPath() const
 	return (abs(RobotX() - TreasureX()) + abs(RobotY() - TreasureY()));
 }
 
-string Robot::PathSoFar() const
+string Robot::GetPathSoFar() const
 {
 	return path_so_far_;
 }
 
-vector<string> Robot::RobotPath() const
+vector<string> Robot::GetRobotPath() const
 {
 	return robot_path_;
 }
 
-void Robot::SetPathSoFar(string& new_move)
+void Robot::SetPathSoFar(char& new_move)
 {
 	path_so_far_ += new_move;
 }
@@ -99,6 +101,14 @@ bool Robot::CheckValidMove(string& path_so_far, char& move) const
 		}
 	}
 	return counter <= GetMaxDistance();
+}
+
+void Robot::CountPathRhs(int robot_x, int robot_y, int treasure_x, int treasure_y, string path_so_far)
+{
+}
+
+void Robot::CountPathLhs(int robot_x, int robot_y, int treasure_x, int treasure_y, string path_so_far)
+{
 }
 
 void Robot::PrintTotalPath() const

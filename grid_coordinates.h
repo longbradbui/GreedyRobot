@@ -7,6 +7,8 @@ class Coordinates
 public:
 	Coordinates();
 	Coordinates(int x, int y);
+	int x_;
+	int y_;
 	int GetX() const;
 	int GetY() const;
 	void SetX(int x);
@@ -17,10 +19,7 @@ public:
 	Coordinates operator-(const Coordinates& rhs) const;
 	bool operator==(const Coordinates& rhs) const;
 	bool operator!=(const Coordinates& rhs) const;
-
-private:
-	int x_;
-	int y_;
+	
 };
 
 #endif
