@@ -23,8 +23,7 @@ public:
 	void SetPathSoFar(char& new_move);
 	void SetRobotPath(string& new_path);
 	bool CheckValidMove(string& path_so_far, char& move) const;
-	void CountPathRhs(int robot_x, int robot_y, int treasure_x, int treasure_y, string path_so_far);
-	void CountPathLhs(int robot_x, int robot_y, int treasure_x, int treasure_y, string path_so_far);
+	int CountPaths(Coordinates robot_, Coordinates treasure_, string path_so_far, int max_distance, int shortest_path);
 
 private:
 	int max_distance_;

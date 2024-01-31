@@ -3,6 +3,11 @@
 #include <iostream>
 using namespace std;
 
+static const Coordinates North(0, 1);
+static const Coordinates South(0, -1);
+static const Coordinates East(1, 0);
+static const Coordinates West(-1, 0);
+
 Robot::Robot()
 {
 	robot_.x_ = 0;
@@ -23,8 +28,6 @@ Robot::Robot(int max_distance, int robot_x, int robot_y, int treasure_x, int tre
 	max_distance_ = max_distance;
 	num_paths_ = 0;
 	path_so_far_ = "";
-	CountPathLhs(robot_.x_, robot_.y_, treasure_.x_, treasure_.y_, path_so_far_);
-	CountPathRhs(robot_.x_, robot_.y_, treasure_.x_, treasure_.y_, path_so_far_);
 }
 
 int Robot::RobotX() const
@@ -103,13 +106,11 @@ bool Robot::CheckValidMove(string& path_so_far, char& move) const
 	return counter <= GetMaxDistance();
 }
 
-void Robot::CountPathRhs(int robot_x, int robot_y, int treasure_x, int treasure_y, string path_so_far)
+int Robot::CountPaths(Coordinates robot_, Coordinates treasure_, string path_so_far, int max_distance, int shortest_path)
 {
+	return 0;
 }
 
-void Robot::CountPathLhs(int robot_x, int robot_y, int treasure_x, int treasure_y, string path_so_far)
-{
-}
 
 void Robot::PrintTotalPath() const
 {
