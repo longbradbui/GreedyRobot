@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GreedyRobot.cpp" />
+    <ClCompile Include="greedy_robot.cpp" />
     <ClCompile Include="grid_coordinates.cpp" />
     <ClCompile Include="robot.cpp" />
   </ItemGroup>

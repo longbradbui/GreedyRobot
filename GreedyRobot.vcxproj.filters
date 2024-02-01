@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GreedyRobot.cpp">
+    <ClCompile Include="greedy_robot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="grid_coordinates.cpp">

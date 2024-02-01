@@ -18,7 +18,7 @@ Robot::Robot()
 	path_so_far_ = "";
 	new_move_ = "";
 	int path = CountPaths(robot_, treasure_, path_so_far_, new_move_);
-	PrintAllPath();
+	DisplayPath();
 	PrintTotalPath(path);
 }
 
@@ -32,13 +32,8 @@ Robot::Robot(int max_distance, int robot_x, int robot_y, int treasure_x, int tre
 	path_so_far_ = "";
 	new_move_ = "";
 	int path = CountPaths(robot_, treasure_, path_so_far_, new_move_);
-	PrintAllPath();
+	DisplayPath();
 	PrintTotalPath(path);
-}
-
-int Robot::GetMaxDistance() const
-{
-	return max_distance_;
 }
 
 int Robot::GetShortestPath() const
@@ -46,14 +41,9 @@ int Robot::GetShortestPath() const
 	return (abs(robot_.GetX() - treasure_.GetX()) + abs(robot_.GetY() - treasure_.GetY()));
 }
 
-string Robot::GetPathSoFar() const
+int Robot::GetMaxDistance() const
 {
-	return path_so_far_;
-}
-
-vector<string> Robot::GetRobotPath() const
-{
-	return robot_path_;
+	return max_distance_;
 }
 
 void Robot::SetRobotPath(string& new_path)
@@ -85,11 +75,11 @@ bool Robot::IsValidMove(const string& path_so_far, string& move) const
 int Robot::CountPaths(Coordinates robot, Coordinates treasure, string path_so_far, string new_move)
 {
 	path_so_far += new_move;
-	if (path_so_far.length() > GetShortestPath() || !IsValidMove(path_so_far, new_move))
+	if ((path_so_far.length() > GetShortestPath()) || (!IsValidMove(path_so_far, new_move)))
 	{
 		return 0;
 	}
-	else if ((robot == treasure) && IsValidMove(path_so_far, new_move))
+	else if ((robot == treasure) && (IsValidMove(path_so_far, new_move)))
 	{
 		SetRobotPath(path_so_far);
 		return 1;
@@ -132,19 +122,7 @@ int Robot::CountPaths(Coordinates robot, Coordinates treasure, string path_so_fa
 	return 0;
 }
 
-void Robot::PrintTotalPath(int path) const
-{
-	if (robot_ == treasure_)
-	{
-		cout << "Number of path: 0" << endl;
-	}
-	else 
-	{
-		cout << "Number of paths: " << path << endl;
-	}
-}
-
-bool Robot::PrintAllPath() const
+bool Robot::DisplayPath() const
 {
 	if (robot_path_.empty())
 	{
@@ -159,3 +137,17 @@ bool Robot::PrintAllPath() const
 		return true;
 	}
 }
+
+void Robot::PrintTotalPath(int path) const
+{
+	if (robot_ == treasure_)
+	{
+		cout << "Number of path: 0" << endl;
+	}
+	else 
+	{
+		cout << "Number of paths: " << path << endl;
+	}
+}
+
+
