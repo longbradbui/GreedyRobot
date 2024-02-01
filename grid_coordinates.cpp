@@ -10,6 +10,25 @@ Coordinates::Coordinates(int x, int y): x_(x), y_(y)
 {
 }
 
+int Coordinates::GetX() const
+{
+	return x_;
+}
+
+int Coordinates::GetY() const
+{
+	return y_;
+}
+
+void Coordinates::SetX(int x)
+{
+	x_ = x;
+}
+
+void Coordinates::SetY(int y)
+{
+	y_ = y;
+}
 
 Coordinates& Coordinates::operator+=(const Coordinates& rhs)
 {

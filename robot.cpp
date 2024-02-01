@@ -10,49 +10,25 @@ static const Coordinates West(-1, 0);
 
 Robot::Robot()
 {
-	robot_.x_ = 0;
-	robot_.y_ = 0;
-	treasure_.x_ = 0;
-	treasure_.y_ = 0;
+	robot_.SetX(0);
+	robot_.SetY(0);
+	treasure_.SetX(0);
+	treasure_.SetY(0);
 	max_distance_ = 1;
-	num_paths_ = 0;
 	path_so_far_ = "";
 }
 
 Robot::Robot(int max_distance, int robot_x, int robot_y, int treasure_x, int treasure_y)
 {
-	robot_.x_ = robot_x ;
-	robot_.y_ = robot_y;
-	treasure_.x_ = treasure_x;
-	treasure_.y_ = treasure_y;
+	robot_.SetX(robot_x);
+	robot_.SetY(robot_y);
+	treasure_.SetX(treasure_x);
+	treasure_.SetY(treasure_y);
 	max_distance_ = max_distance;
-	num_paths_ = 0;
 	path_so_far_ = "";
-}
-
-int Robot::RobotX() const
-{
-	return robot_.x_;
-}
-
-int Robot::RobotY() const
-{
-	return robot_.y_;
-}
-
-int Robot::TreasureX() const
-{
-	return treasure_.x_;
-}
-
-int Robot::TreasureY() const
-{
-	return treasure_.y_;
-}
-
-int Robot::GetTotalPaths() const
-{
-	return num_paths_;
+	int path = CountPaths(robot_, treasure_, path_so_far_, "");
+	PrintAllPath();
+	PrintTotalPath(path);
 }
 
 int Robot::GetMaxDistance() const
@@ -62,7 +38,7 @@ int Robot::GetMaxDistance() const
 
 int Robot::GetShortestPath() const
 {
-	return (abs(RobotX() - TreasureX()) + abs(RobotY() - TreasureY()));
+	return (abs(robot_.GetX() - treasure_.GetX()) + abs(robot_.GetY() - treasure_.GetY()));
 }
 
 string Robot::GetPathSoFar() const
@@ -75,51 +51,107 @@ vector<string> Robot::GetRobotPath() const
 	return robot_path_;
 }
 
-void Robot::SetPathSoFar(char& new_move)
-{
-	path_so_far_ += new_move;
-}
-
 void Robot::SetRobotPath(string& new_path)
 {
 	robot_path_.push_back(new_path);
 }
 
-bool Robot::CheckValidMove(string& path_so_far, char& move) const
+bool Robot::CheckValidMove(const string& path_so_far, string& move) const
 {
 	int counter = 0;
-	if ((path_so_far.length() == 0) || ((GetMaxDistance() > 1) && (path_so_far.length() == 1)))
+	int maxDistance = GetMaxDistance();
+	if (path_so_far.empty() || (maxDistance > 1 && path_so_far.length() == 1))
 	{
 		return true;
 	}
 	for (int i = path_so_far.length() - 1; i >= 0; i--)
 	{
-		if (path_so_far.at(i) == move)
+		if (path_so_far.substr(i, 1) == move)
 		{
 			counter++;
 		}
-		else if (path_so_far.at(i) != move)
+		else
 		{
 			break;
 		}
 	}
-	return counter <= GetMaxDistance();
+	return counter <= maxDistance;
 }
 
-int Robot::CountPaths(Coordinates robot_, Coordinates treasure_, string path_so_far, int max_distance, int shortest_path)
+int Robot::CountPaths(Coordinates robot, Coordinates treasure, string path_so_far, string new_move)
 {
+	path_so_far += new_move;
+	if (path_so_far.length() > GetShortestPath())
+	{
+		return 0;
+	}
+	else if ((robot == treasure) && CheckValidMove(path_so_far, new_move))
+	{
+		SetRobotPath(path_so_far);
+		return 1;
+	}
+	else
+	{
+		if ((treasure.GetX() < robot.GetX()) && (treasure.GetY() > robot.GetY()))
+		{
+			return CountPaths(robot + North, treasure, path_so_far, "N") + CountPaths(robot + West, treasure, path_so_far, "W");
+		}
+		else if ((treasure.GetX() > robot.GetX()) && (treasure.GetY() > robot.GetY()))
+		{
+			return CountPaths(robot + North, treasure, path_so_far, "N") + CountPaths(robot + East, treasure, path_so_far, "E");
+		}
+		else if ((treasure.GetX() > robot.GetX()) && (treasure.GetY() < robot.GetY()))
+		{
+			return CountPaths(robot + South, treasure, path_so_far, "S") + CountPaths(robot + East, treasure, path_so_far, "E");
+		}
+		else if ((treasure.GetX() < robot.GetX()) && (treasure.GetY() < robot.GetY()))
+		{
+			return CountPaths(robot + South, treasure, path_so_far, "S") + CountPaths(robot + West, treasure, path_so_far, "W");
+		}
+		else if ((treasure.GetX() == robot.GetX()) && (treasure.GetY() > robot.GetY()))
+		{
+			return CountPaths(robot + North, treasure, path_so_far, "N");
+		}
+		else if ((treasure.GetX() == robot.GetX()) && (treasure.GetY() < robot.GetY()))
+		{
+			return CountPaths(robot + South, treasure, path_so_far, "S");
+		}
+		else if ((treasure.GetX() < robot.GetX()) && (treasure.GetY() == robot.GetY()))
+		{
+			return CountPaths(robot + West, treasure, path_so_far, "W");
+		}
+		else if ((treasure.GetX() > robot.GetX()) && (treasure.GetY() == robot.GetY()))
+		{
+			return CountPaths(robot + East, treasure, path_so_far, "E");
+		}
+	}
 	return 0;
 }
 
-
-void Robot::PrintTotalPath() const
+void Robot::PrintTotalPath(int path) const
 {
-	if ((RobotX() == TreasureX()) && (RobotY() == TreasureY()))
+	if (robot_ == treasure_)
 	{
 		cout << "Number of path: 0" << endl;
 	}
 	else 
 	{
-		cout << "Number of path: " << GetTotalPaths() << endl;
+		cout << "Number of path: " << path << endl;
+	}
+}
+
+bool Robot::PrintAllPath() const
+{
+	if (robot_path_.empty())
+	{
+		return false;
+	}
+	else
+	{
+		for (const string& path : robot_path_)
+		{
+			cout << path << endl;
+		}
+		return true;
 	}
 }
