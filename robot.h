@@ -23,6 +23,7 @@ public:
 private:
 	int max_distance_;
 	string path_so_far_;
+	string new_move_;
 	vector<string> robot_path_;
 	Coordinates robot_;
 	Coordinates treasure_;

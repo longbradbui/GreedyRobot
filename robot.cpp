@@ -16,6 +16,10 @@ Robot::Robot()
 	treasure_.SetY(0);
 	max_distance_ = 1;
 	path_so_far_ = "";
+	new_move_ = "";
+	int path = CountPaths(robot_, treasure_, path_so_far_, new_move_);
+	PrintAllPath();
+	PrintTotalPath(path);
 }
 
 Robot::Robot(int max_distance, int robot_x, int robot_y, int treasure_x, int treasure_y)
@@ -26,7 +30,8 @@ Robot::Robot(int max_distance, int robot_x, int robot_y, int treasure_x, int tre
 	treasure_.SetY(treasure_y);
 	max_distance_ = max_distance;
 	path_so_far_ = "";
-	int path = CountPaths(robot_, treasure_, path_so_far_, "");
+	new_move_ = "";
+	int path = CountPaths(robot_, treasure_, path_so_far_, new_move_);
 	PrintAllPath();
 	PrintTotalPath(path);
 }
@@ -59,8 +64,7 @@ void Robot::SetRobotPath(string& new_path)
 bool Robot::IsValidMove(const string& path_so_far, string& move) const
 {
 	int counter = 0;
-	int maxDistance = GetMaxDistance();
-	if (path_so_far.empty() || (maxDistance > 1 && path_so_far.length() == 1))
+	if (path_so_far.empty() || (GetMaxDistance() > 1 && path_so_far.length() == 1))
 	{
 		return true;
 	}
@@ -75,13 +79,13 @@ bool Robot::IsValidMove(const string& path_so_far, string& move) const
 			break;
 		}
 	}
-	return counter <= maxDistance;
+	return counter <= GetMaxDistance();
 }
 
 int Robot::CountPaths(Coordinates robot, Coordinates treasure, string path_so_far, string new_move)
 {
 	path_so_far += new_move;
-	if (path_so_far.length() > GetShortestPath())
+	if (path_so_far.length() > GetShortestPath() || !IsValidMove(path_so_far, new_move))
 	{
 		return 0;
 	}
@@ -107,7 +111,7 @@ int Robot::CountPaths(Coordinates robot, Coordinates treasure, string path_so_fa
 		else if ((treasure.GetX() < robot.GetX()) && (treasure.GetY() < robot.GetY()))
 		{
 			return CountPaths(robot + South, treasure, path_so_far, "S") + CountPaths(robot + West, treasure, path_so_far, "W");
-		}
+		}		
 		else if ((treasure.GetX() == robot.GetX()) && (treasure.GetY() > robot.GetY()))
 		{
 			return CountPaths(robot + North, treasure, path_so_far, "N");
@@ -136,7 +140,7 @@ void Robot::PrintTotalPath(int path) const
 	}
 	else 
 	{
-		cout << "Number of path: " << path << endl;
+		cout << "Number of paths: " << path << endl;
 	}
 }
 
