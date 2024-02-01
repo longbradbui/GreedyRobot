@@ -17,7 +17,7 @@ public:
 	void PrintTotalPath(int path) const;
 	bool PrintAllPath() const;
 	void SetRobotPath(string& new_path);
-	bool CheckValidMove(const string& path_so_far, string& move) const;
+	bool IsValidMove(const string& path_so_far, string& move) const;
 	int CountPaths(Coordinates robot, Coordinates treasure, string path_so_far, string new_move);
 
 private:

@@ -56,7 +56,7 @@ void Robot::SetRobotPath(string& new_path)
 	robot_path_.push_back(new_path);
 }
 
-bool Robot::CheckValidMove(const string& path_so_far, string& move) const
+bool Robot::IsValidMove(const string& path_so_far, string& move) const
 {
 	int counter = 0;
 	int maxDistance = GetMaxDistance();
@@ -85,7 +85,7 @@ int Robot::CountPaths(Coordinates robot, Coordinates treasure, string path_so_fa
 	{
 		return 0;
 	}
-	else if ((robot == treasure) && CheckValidMove(path_so_far, new_move))
+	else if ((robot == treasure) && IsValidMove(path_so_far, new_move))
 	{
 		SetRobotPath(path_so_far);
 		return 1;
