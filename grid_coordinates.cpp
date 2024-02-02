@@ -2,11 +2,11 @@
 #include <iostream>
 using namespace std;
 
-Coordinates::Coordinates(): x_(0), y_(0)
+Coordinates::Coordinates() : x_(0), y_(0)
 {
 }
 
-Coordinates::Coordinates(int x, int y): x_(x), y_(y)
+Coordinates::Coordinates(int x, int y) : x_(x), y_(y)
 {
 }
 
