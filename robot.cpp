@@ -135,7 +135,7 @@ bool Robot::DisplayPath() const
 		for (auto iterator = robot_path_.begin(); iterator != robot_path_.end(); ++iterator)
 		{
 			cout << *iterator;
-			if (iterator + 1 != robot_path_.end())  // Check if it is not the last path
+			if (iterator != robot_path_.end())  // Check if it is not the last path
 			{
 				cout << endl;  // Print newline if it is not the last path
 			}
