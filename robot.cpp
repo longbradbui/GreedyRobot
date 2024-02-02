@@ -122,6 +122,8 @@ int Robot::CountPaths(Coordinates robot, Coordinates treasure, string path_so_fa
 	return 0;
 }
 
+/* In this version, the "endl" keyword is only printed after each path if it is not the last path in the robot_path_ vector.
+This way, I can avoid printing an extra newline after the last path, especially when working with empty vector.*/
 bool Robot::DisplayPath() const
 {
 	if (robot_path_.empty())
@@ -130,9 +132,13 @@ bool Robot::DisplayPath() const
 	}
 	else
 	{
-		for (const string& path : robot_path_)
+		for (auto iterator = robot_path_.begin(); iterator != robot_path_.end(); ++iterator)
 		{
-			cout << path << endl;
+			cout << *iterator;
+			if (iterator + 1 != robot_path_.end())  // Check if it is not the last path
+			{
+				cout << endl;  // Print newline if it is not the last path
+			}
 		}
 		return true;
 	}
